@@ -1,17 +1,31 @@
 const searchFood = () => {
   const searchField = document.getElementById('search-field');
   const searchText = searchField.value;
+  // clear data
   searchField.value = '';
   
-  const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
-  
-  fetch(url)
-  .then(res => res.json())
-  .then(data => displaySearchResult(data.meals))
+  if (searchText == '') {
+    // Please write something to display
+  }
+  else {
+    // load data
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displaySearchResult(data.meals))
+  }
 } 
 
 const displaySearchResult = meals => {
   const searchResult = document.getElementById('search-result');
+  // clear previous search result
+  // searchResult.innerHTML = ''; //not recommended
+  searchResult.textContent = '';
+
+  if (meals.length == 0) {
+    // show no result found
+  }
+  
   meals.forEach(meal => {
     // console.log(meal);
     const div = document.createElement('div');
