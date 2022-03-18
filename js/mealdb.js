@@ -1,9 +1,15 @@
+
+// hide error message
+document.getElementById('error-message').style.display = 'none';
+
 const searchFood = () => {
   const searchField = document.getElementById('search-field');
   const searchText = searchField.value;
   // clear data
   searchField.value = '';
-  
+  // hide error message
+  document.getElementById('error-message').style.display = 'none';
+
   if (searchText == '') {
     // Please write something to display
   }
@@ -13,8 +19,14 @@ const searchFood = () => {
     fetch(url)
     .then(res => res.json())
     .then(data => displaySearchResult(data.meals))
+    .catch(error => displayError(error));
   }
 } 
+
+const displayError = error => {
+  // show error message
+  document.getElementById('error-message').style.display = 'block';
+}
 
 const displaySearchResult = meals => {
   const searchResult = document.getElementById('search-result');
